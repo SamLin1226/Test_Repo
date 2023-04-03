@@ -84,34 +84,37 @@ node* list_reverse(node *old_head){
 }
 
 node *merge_list(node *list1, node *list2){
-    node *node1, *temp_node1, *node2, *temp_node2, *out_node;
-    int c = 0;
+    node *node1, *node2, *this_node, *last_node, *out_node;
+    int c = 1;
 
     node1 = list1;
     node2 = list2;
 
-    while(node1 != NULL || node2 != NULL){
-        if(node1->val > node2->val){
-            temp_node1 = node1;
-            if(c == 0){
-                out_node = node1;
-            }
-            temp_node1->next = node2;
-            temp_node2->next = node1;
-            node1 = node1->next;
+    if(node1->val > node2->val){
+        out_node = node1;
+        last_node = out_node;
+        last_node->next = this_node;
+        this_node = node2;
+    }
+    else{
+        out_node = node2;
+        last_node = out_node;
+        last_node->next = this_node;
+        this_node = node1;
+    }
+
+    node1 = node1->next;
+    node2 = node2->next;
+
+    while (node1 != NULL && node2 != NULL){
+        if(this_node->val > node1->val){
             
         }
-        else{
-            temp_node2 = node2;
-            if(c == 0){
-                out_node = node2;
-            }
-            temp_node2->next = node1;
-            temp_node1->next = node2;
-            node2 = node2->next;
-        }
-        c++;
+
     }
+    
+
+    
     return out_node;
 }
 
@@ -119,13 +122,21 @@ node *list_merge_sort(node *head, int n){
     if(n == 1)
         return head;
 
-    node *node1, *node2, *out_node;
+    node *node1, *node2, *temp_node, *out_node;
     
     node1 = head;
-    node2 = head;
-    for(int i = 0; i < n/2; i++){
-        node2 = node2->next;
+    temp_node = head;
+
+    for(int i = 1; i < (n/2) ; i++){
+        temp_node = temp_node->next;
+        
     }
+    
+    node2 = temp_node->next;
+    temp_node->next = NULL;
+   
+
+
     node1 = list_merge_sort(node1,n/2);
     node2 = list_merge_sort(node2,n-(n/2));
     out_node = merge_list(node1, node2);
@@ -151,15 +162,16 @@ int main(){
 
     list1 = new_rand_list(n);
     print_list(list1);
-    list1 = list_reverse(list1);
     printf("\n");
+
+    list1 = list_reverse(list1);
     print_list(list1);
     printf("\n");
-    /*
+    
     list1 = list_merge_sort(list1, n);
     print_list(list1);
     printf("\n");
-*/
+
     free_list(list1);
 
 
