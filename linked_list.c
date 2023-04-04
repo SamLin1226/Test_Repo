@@ -28,7 +28,8 @@ node* new_list(int n){
 }
 
 node* new_rand_list(int n){
-    srand( time(NULL) );
+    //srand( time(NULL) );
+    srand( 1 );
     node *head;
     node *temp_ptr;
     int max, min;
@@ -87,31 +88,36 @@ node *merge_list(node *list1, node *list2){
     node *node1, *node2, *this_node, *last_node, *out_node;
     int c = 1;
 
-    node1 = list1;
-    node2 = list2;
+    while(node1 != NULL && node2 != NULL){
+        if(node1->val > node2->val){
+            if(c == 1){
+                out_node = node1;
+                out_node->next = node2;
+                last_node = out_node;
+                this_node = out_node->next;
+                node1 = node1->next;
+                continue;
+            }
+            this_node
 
-    if(node1->val > node2->val){
-        out_node = node1;
-        last_node = out_node;
-        last_node->next = this_node;
-        this_node = node2;
-    }
-    else{
-        out_node = node2;
-        last_node = out_node;
-        last_node->next = this_node;
-        this_node = node1;
-    }
 
-    node1 = node1->next;
-    node2 = node2->next;
+        }
+        else{
+            if(c == 1){
+                out_node = node2;
+                out_node->next = node1;
+                last_node = out_node;
+                this_node = out_node->next;
+                node2 = node2->next;
+                continue;
+            }
 
-    while (node1 != NULL && node2 != NULL){
-        if(this_node->val > node1->val){
-            
         }
 
+
     }
+
+    
     
 
     
