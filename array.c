@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+
+
 int *new_array(int n){
     int *array;
     array = (int*)calloc(n, sizeof(int));
@@ -49,13 +51,13 @@ void swap(int *a, int *b){
     *b = temp;
 }
 
-void q_sort(int *array, int n){
+void q_sort_t(int *array, int n){
     if(n == 1)
         return;
     
     int c = 0;
     for(int i = 1; i < n; i++){
-        if(*array < *(array + i)){
+        if(*array > *(array + i)){
             swap(array + c, array + i);
             c++;
         }
@@ -65,8 +67,8 @@ void q_sort(int *array, int n){
         c = 1 ;
     }
     
-    q_sort(array, c);
-    q_sort(array + c, n - c);
+    q_sort_t(array, c);
+    q_sort_t(array + c, n - c);
     return;
 }
 
@@ -74,7 +76,7 @@ void bubble_sort(int *array, int n){
    
     for(int i = 0; i < n; i++){
         for(int j = 0; j < n; j++){
-            if(array[i] > array[j]){
+            if(array[i] < array[j]){
                 swap(&array[i], &array[j]);
             }
         }
@@ -85,19 +87,30 @@ void bubble_sort(int *array, int n){
 
 int main() {
     int *array, *rand_array;
-    int n = 10;
-    
-    array = new_array(n);
+    int n = 10000;
+
+    clock_t t1,t2,t3,t4;            
+
     rand_array = new_rand_array(n);
+    array = new_array(n);
     cpy_array(rand_array, array, n);
 
     print_array(rand_array, n);
 
-    q_sort(rand_array, n);
-    bubble_sort(array, n);
 
-    print_array(rand_array, n);
-    print_array(array, n);
+    t1 = clock();
+    q_sort_t(rand_array, n);
+    t2 = clock();
+    printf("q time = %f \n", (double)(t2-t1)/CLOCKS_PER_SEC);
+
+
+    t3 = clock();
+    bubble_sort(array, n);
+    t4 = clock();
+    printf("b time = %f \n", (double)(t4-t3)/CLOCKS_PER_SEC);
+
+    //print_array(rand_array, n);
+    //print_array(array, n);
 
     return 0;
 }
