@@ -85,16 +85,25 @@ void bubble_sort(int *array, int n){
     return;
 }
 
+
+
 int main() {
     int *array, *rand_array;
-    int n = 10000;
+    int n = 10;
+    int *a, *b; 
+
+   
 
     clock_t t1,t2,t3,t4;            
-
     rand_array = new_rand_array(n);
     array = new_array(n);
-    cpy_array(rand_array, array, n);
 
+    
+    print_array(array, n);
+
+
+
+    cpy_array(rand_array, array, n);
     print_array(rand_array, n);
 
 
@@ -111,6 +120,8 @@ int main() {
 
     //print_array(rand_array, n);
     //print_array(array, n);
+
+
 
     return 0;
 }
