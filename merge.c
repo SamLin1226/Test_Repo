@@ -57,6 +57,7 @@ void print_array(int* array, int n){
 int main(){
 
 #if 1
+
     int nums1Size = 6;
     int nums2Size = 5;
     int m = 1;
@@ -65,6 +66,7 @@ int main(){
     int nums2[5] = {1,2,3,5,6}; 
     
 #else
+
     int nums1Size = 2;
     int nums2Size = 1;
     int m = 1;
