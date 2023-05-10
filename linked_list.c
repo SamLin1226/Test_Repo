@@ -154,6 +154,49 @@ node *merge_list(node *list1, node *list2)
     return out_list;
 }
 
+node *merge_list2(node *list1, node *list2)
+{
+    node *itr, *temp, *out;
+
+    itr = (node *)malloc(sizeof(node));
+    temp = itr;
+
+    if (list1 == NULL && list2 == NULL)
+    {
+        return NULL;
+    }
+
+    while (list1 != NULL && list2 != NULL)
+    {
+        if (list1->val > list2->val)
+        {
+            itr->next = list1;
+            itr = list1;
+            list1 = list1->next;
+        }
+        else
+        {
+            itr->next = list2;
+            itr = list2;
+            list2 = list2->next;
+        }
+    }
+
+    if (list1 == NULL)
+    {
+        itr->next = list2;
+    }
+
+    if (list2 == NULL)
+    {
+        itr->next = list1;
+    }
+
+    out = temp->next;
+    free(temp);
+    return (out);
+}
+
 node *list_merge_sort(node *head, int n)
 {
     if (n == 1)
@@ -174,7 +217,8 @@ node *list_merge_sort(node *head, int n)
 
     node1 = list_merge_sort(node1, n / 2);
     node2 = list_merge_sort(node2, n - (n / 2));
-    out_node = merge_list(node1, node2);
+    // out_node = merge_list(node1, node2);
+    out_node = merge_list2(node1, node2);
     return out_node;
 }
 
@@ -184,13 +228,12 @@ void free_list(node *head)
     if (head != NULL)
     {
         free_list(head->next);
-        printf("%p free success! \n",  head);
+        // printf("%p free success! \n",  head);
         free(head);
         return;
     }
-    
+
     return;
-    
 }
 
 void chk_sort(node *list)
@@ -204,7 +247,7 @@ void chk_sort(node *list)
 
     while (iter != NULL)
     {
-        if (temp > iter->val)
+        if (temp < iter->val)
         {
             printf("ERROR! \n");
             return;
@@ -218,7 +261,7 @@ void chk_sort(node *list)
 int main()
 {
     node *list1;
-    int n = 10;
+    int n = 100;
 
     list1 = new_rand_list(n);
     print_list(list1);
