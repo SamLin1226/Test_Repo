@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <stdint.h>
 
+#define testNum 1UL
+
 char *i2b(int32_t intNum)
 {
     char *out;
@@ -48,6 +50,7 @@ int main()
     a = (uint32_t*) malloc(sizeof(uint32_t));
 
     *a = 0xF0F0F0F0;
+    /*
     printf("%s\n", i2b(*a));
 
     set_bit(a, 31, 0);
@@ -58,6 +61,8 @@ int main()
 
     set_bit(a, 27, 3);
     printf("%s\n", i2b(*a));
+*/
+    printf("%s\n", i2b(testNum));
 
     return 0;
 }

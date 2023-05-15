@@ -85,14 +85,24 @@ void bubble_sort(int *array, int n){
     return;
 }
 
+void chk_sort(int* arr, int n){
+    for(int i = 1; i < n; i++){
+        if(arr[i] < arr[i-1]){
+            printf("Sort error!\n");
+            return;
+        }
+    }
+
+    printf("Sort correct!\n");
+    return;
+}
 
 
 int main() {
     int *array, *rand_array;
-    int n = 10;
+    int n = 100;
     int *a, *b; 
 
-   
 
     clock_t t1,t2,t3,t4;            
     rand_array = new_rand_array(n);
@@ -110,12 +120,14 @@ int main() {
     t1 = clock();
     q_sort_t(rand_array, n);
     t2 = clock();
+    chk_sort(rand_array, n);
     printf("q time = %f \n", (double)(t2-t1)/CLOCKS_PER_SEC);
 
 
     t3 = clock();
     bubble_sort(array, n);
     t4 = clock();
+    chk_sort(array, n);
     printf("b time = %f \n", (double)(t4-t3)/CLOCKS_PER_SEC);
 
     //print_array(rand_array, n);
