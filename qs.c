@@ -16,8 +16,7 @@ void qsort(int *arr, int n){
 
     for(int i = 1; i < n; i++){
         if(arr[0] < arr[i]){
-            swap(&arr[c], &arr[i]);
-            c++;
+            swap(&arr[c++], &arr[i]);
         }
     }
 
