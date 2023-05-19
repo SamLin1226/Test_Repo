@@ -166,6 +166,10 @@ void delete_node(Node *root, int key){
 
 }
 
+int *tree_height(Node *root){
+    
+}
+
 void print_array(int* array, int n){
     for(int i = 0; i < n; i++){
         printf("%d ", array[i]);
